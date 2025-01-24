@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PanoGaussian">
+  <meta name="keywords" content="3D Gaussian Splatting, panoramic image, 3D reconstruxtion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PanoGaussian</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://homepage.hit.edu.cn/xtwang">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3DGS</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PanoGaussian</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://homepage.hit.edu.cn/xtwang">Xingtao Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              Kaixin Wu<sup>2</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Harbin Institute of Technology</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-courtyard" style="text-align: center;">
+          <video width="300" height="300" poster="" id="courtyard_cube" autoplay controls muted loop playsinline height="100%" width="100%">
+            <source src="./static/videos/courtyard_cube_cut.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Courtyard<br>(PanoGaussian output)</p>
+		  <video width="300" height="300" poster="" id="courtyard_random" autoplay controls muted loop playsinline height="100%" width="100%">
+            <source src="./static/videos/courtyard_random_cut2.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Courtyard<br>(original 3D-GS output)</p>
+        </div>
+        <div class="item item-classroom" style="text-align: center;">
+          <video width="300" height="300" poster="" id="Classroom_cube" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/Classroom_cube_cut.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Classroom<br>(PanoGaussian output)</p>
+		  <video width="300" height="300" poster="" id="Classroom_random" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/Classroom_random_cut.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Classroom<br>(original 3D-GS output)</p>
+        </div>
+		<div class="item item-Plaza" style="text-align: center;">
+          <video width="300" height="300" poster="" id="Plaza_cube" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/Plaza_cube.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Plaza<br>(PanoGaussian output)</p>
+		  <video width="300" height="300" poster="" id="Plaza_random" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/Plaza_random.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Plaza<br>(original 3D-GS output)</p>
+        </div>
+        <div class="item item-39_3" style="text-align: center;">
+          <video width="300" height="300" poster="" id="39_3_cube" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/39_3_cube.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data real dataset:<br>VID_20240603_141155_00_039_seg3<br>(PanoGaussian output)</p>
+		  <video width="300" height="300" poster="" id="39_3_random" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/39_3_random.mp4"
+                    type="video/mp4">
+          </video>
+		  <p class="has-text-centered is-size-6">PGS-Data real dataset:<br>VID_20240603_141155_00_039_seg3<br>(original 3D-GS output)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D Gaussian Splatting (3D-GS) has recently attracted great attention with real-time and photo-realistic renderings. However, the high-quality of 3D-GS is built upon a great amount of images that require extensive human labor to capture, especially in large-scale scenarios. In this paper, we combine 3D-GS with panoramic vision to introduce PanoGaussian, which reduces data capturing costs by utilizing the broad field of view in panoramic inputs. PanoGaussian takes panoramic images as input and project panoramic regions onto planar images to be compatible with mainstream 3D-GS workflows. Specifically, several most reliable regions are firstly searched based on a texture complexity map of the panoramic image. The reliable regions contain rich textures that facilitate keypoint matching, thus providing accurate pose estimation. Afterwards, Cubemap Projection is conducted on the panoramic image to supplement the areas that are not covered in the reliable regions. The poses of cube regions are derived from the poses of reliable regions. Finally, all the reliable regions as well as cube regions are utilized to reconstruct the 3D-GS model. Moreover, we build a Panoramic Gaussian Splatting dataset called PGS-Data, which consists of both synthetic and real data. Extensive experiments based on several 3D-GS workflows confirm the superiority of PanoGaussian in terms of both rendering quality and efficiency. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper pipeline. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Pipeline</h2>
+        <div class="publication-video">
+          <img src="./static/images/Fig2.png" alt="pipeline" />
+		  <p>
+            The pipeline of PanoGaussian consists of two main stages: Obtaining Projections and Poses of Reliable Regions, Calculating Projections and Poses of Cube Regions. Stage one generates texture complexity maps from the input panoramic images and picks several reliable regions based on tile-based calculation, then estimates the poses of the reliable regions. Stage two generates the cube regions to supplement the uncovered areas and calculates the poses of the cube regions bases on the poses of the reliable regions. Finally, all the reliable regions as well as cube regions are utilized to reconstruct the 3D-GS model. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Experiment</h2>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Qualitative result</h3>
+        <div class="content has-text-justified">
+          <p>
+            The qualitative results of the original 3D-GS and our PanoGaussian on PGS-Data. The first three sets of contrast images come from the synthetic dataset while the next three sets come from the real dataset. Our method presents better visual effects.
+          </p>
+        </div>
+        <img src="./static/images/Fig7.png" alt="pipeline" />
+        <br/>
+        <!--/ Interpolating. -->
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Abalation study</h2>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Qualitative result</h3>
+        <div class="content has-text-justified">
+          <p>
+            3D-GS-C, 3D-GS-F and 3D-GS-W respectively stand for the result of 3D-GS with only Cubemap Projections in the input, with only projections of reliable regions in the input and with complete input.From 3D-GS-C to 3D-GS-F, and then to 3D-GS-W, the image presents clearer and richer details as well as higher spatial continuity, consistent with quantitative results.
+          </p>
+        </div>
+        <img src="./static/images/Fig9.png" alt="pipeline" />
+        <br/>
+        <!--/ Interpolating. -->
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+		  <p>
+		    In <a href="https://github.com/Mr-Ma-yikun/FastScene">FastScene</a>[Ma et al., 2024], researchers introduced a novel panoramic view synthesis method PNVI, becoming the first to solve panoramic 3DGS from a single panorama. 
+		  </p>
+		  <p>
+			<a href="https://scenedreamer360.github.io/">SceneDreamer360</a>[Li et al., 2024] proposed a novel SceneDreamer360 for text-driven 3D-consistent scene generation using panoramic Gaussian splatting, resulting in detailed scene content and spatial consistency. 
+		  </p>
+		  <p>
+			<a href="https://github.com/LeoDarcy/360GS">360-GS</a>[Bai et al., 2024] proposed a layout-guided 3D Gaussian splatting pipeline and a high-quality point cloud generation method for the initialization of 3D Gaussians from room layout to improve the performance of few-shot novel view synthesis.
+		  </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{,
+  author    = {Xingtao Wang, Kaixin Wu},
+  title     = {},
+  journal   = {},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            The <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> for the website was taken from Nerfies. 
+              We appreciate the authors sharing the templates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
