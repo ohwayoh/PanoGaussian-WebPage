@@ -83,6 +83,12 @@
               <a href="https://homepage.hit.edu.cn/xtwang">Xingtao Wang</a><sup>1</sup>,</span>
             <span class="author-block">
               Kaixin Wu<sup>2</sup></span>
+			  <span class="author-block">
+              Wenrui Li<sup>2</sup></span>
+			  <span class="author-block">
+              Debin Zhao<sup>2</sup></span>
+			  <span class="author-block">
+              Xiaopeng Fan<sup>2</sup></span>
           </div>
 
           <div class="is-size-5 publication-authors">
@@ -147,48 +153,48 @@
             <source src="./static/videos/courtyard_cube_cut.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Courtyard<br>(PanoGaussian output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic subset:<br>Courtyard<br>(PanoGaussian output)</p>
 		  <video width="300" height="300" poster="" id="courtyard_random" autoplay controls muted loop playsinline height="100%" width="100%">
             <source src="./static/videos/courtyard_random_cut2.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Courtyard<br>(original 3D-GS output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic subset:<br>Courtyard<br>(original 3D-GS output)</p>
         </div>
         <div class="item item-classroom" style="text-align: center;">
           <video width="300" height="300" poster="" id="Classroom_cube" autoplay controls muted loop playsinline height="100%">
             <source src="./static/videos/Classroom_cube_cut.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Classroom<br>(PanoGaussian output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic subset:<br>Classroom<br>(PanoGaussian output)</p>
 		  <video width="300" height="300" poster="" id="Classroom_random" autoplay controls muted loop playsinline height="100%">
             <source src="./static/videos/Classroom_random_cut.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Classroom<br>(original 3D-GS output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic subset:<br>Classroom<br>(original 3D-GS output)</p>
         </div>
 		<div class="item item-Plaza" style="text-align: center;">
           <video width="300" height="300" poster="" id="Plaza_cube" autoplay controls muted loop playsinline height="100%">
             <source src="./static/videos/Plaza_cube.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Plaza<br>(PanoGaussian output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic subset:<br>Plaza<br>(PanoGaussian output)</p>
 		  <video width="300" height="300" poster="" id="Plaza_random" autoplay controls muted loop playsinline height="100%">
             <source src="./static/videos/Plaza_random.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data synthetic dataset:<br>Plaza<br>(original 3D-GS output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data synthetic subset:<br>Plaza<br>(original 3D-GS output)</p>
         </div>
         <div class="item item-39_3" style="text-align: center;">
           <video width="300" height="300" poster="" id="39_3_cube" autoplay controls muted loop playsinline height="100%">
             <source src="./static/videos/39_3_cube.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data real dataset:<br>VID_20240603_141155_00_039_seg3<br>(PanoGaussian output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data real-world subset:<br>Corridor2<br>(PanoGaussian output)</p>
 		  <video width="300" height="300" poster="" id="39_3_random" autoplay controls muted loop playsinline height="100%">
             <source src="./static/videos/39_3_random.mp4"
                     type="video/mp4">
           </video>
-		  <p class="has-text-centered is-size-6">PGS-Data real dataset:<br>VID_20240603_141155_00_039_seg3<br>(original 3D-GS output)</p>
+		  <p class="has-text-centered is-size-6">PGS-Data real-world subset:<br>Corridor2<br>(original 3D-GS output)</p>
         </div>
       </div>
     </div>
@@ -217,7 +223,7 @@
         <div class="publication-video">
           <img src="./static/images/Fig2.png" alt="pipeline" />
 		  <p>
-            The pipeline of PanoGaussian consists of two main stages: Obtaining Projections and Poses of Reliable Regions, Calculating Projections and Poses of Cube Regions. Stage one generates texture complexity maps from the input panoramic images and picks several reliable regions based on tile-based calculation, then estimates the poses of the reliable regions. Stage two generates the cube regions to supplement the uncovered areas and calculates the poses of the cube regions bases on the poses of the reliable regions. Finally, all the reliable regions as well as cube regions are utilized to reconstruct the 3D-GS model. 
+            The pipeline of PanoGaussian consists of two branches: the reliable region branch (Br) and the cube region branch (Bc). Br generates texture complexity map from the input panoramic image and picks several reliable regions based on tile-based calculation, then estimates the poses of the reliable regions. Bc generates the cube regions to supplement the uncovered areas and calculates the poses of the cube regions based on the poses of the reliable regions. Finally, all the reliable regions as well as cube regions are utilized to reconstruct the 3D-GS model. 
           </p>
         </div>
       </div>
@@ -239,7 +245,7 @@
         <h3 class="title is-4">Qualitative result</h3>
         <div class="content has-text-justified">
           <p>
-            The qualitative results of the original 3D-GS and our PanoGaussian on PGS-Data. The first three sets of contrast images come from the synthetic dataset while the next three sets come from the real dataset. Our method presents better visual effects.
+            The qualitative results of the original 3D-GS and our PanoGaussian on PGS-Data. The first three sets of contrast images come from the synthetic subset while the next three sets come from the real-world subset.
           </p>
         </div>
         <img src="./static/images/Fig7.png" alt="pipeline" />
@@ -276,9 +282,6 @@
         <h2 class="title is-3">Related Links</h2>
 
         <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
 		  <p>
 		    In <a href="https://github.com/Mr-Ma-yikun/FastScene">FastScene</a>[Ma et al., 2024], researchers introduced a novel panoramic view synthesis method PNVI, becoming the first to solve panoramic 3DGS from a single panorama. 
 		  </p>
